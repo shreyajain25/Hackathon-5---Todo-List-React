@@ -30,19 +30,22 @@ function List(props)
 	return (
                 <div className= "list">
                         {updatedtask}
-                        <button className="edit" onClick={isTaskToEdit}>Edit</button>
-                        <button className="delete" onClick={() => {props.onDelete(props.idx)}}>Delete</button>
+                        
                         
                         {editTask ? 
                         <React.Fragment>
-                                <textarea className="editTask" 
-                                onChange={editTaskInList} value={update}>
+                                <textarea className="editTask" onChange={editTaskInList} value={update}>
                                 </textarea>
-                                <button className="saveTask" 
-                                onClick={updateTask} 
-                                disabled={update.trim().length === 0}>Save</button>
+                                <button className="saveTask" onClick={updateTask} 
+                                disabled={update.trim().length === 0}>
+                                        Save
+                                </button>
                         </React.Fragment>
-                        : null}
+                        : 
+                        <React.Fragment>
+                                <button className="edit" onClick={isTaskToEdit}>Edit</button>
+                                <button className="delete" onClick={() => {props.onDelete(props.idx)}}>Delete</button>
+                        </React.Fragment>}
                 </div>
 	);
 }
