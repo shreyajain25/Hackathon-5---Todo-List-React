@@ -16,10 +16,12 @@ function List(props)
         }
 
         const updateTask = () => {
-                setUpdatedTask(update);
-                setEditTask(false);
-                setUpdate("");
-                props.onEdit(updatedtask, props.idx);
+                if(update.trim().length > 0){
+                        setUpdatedTask(update);
+                        setEditTask(false);
+                        setUpdate("");
+                        props.onEdit(updatedtask, props.idx);
+                }
 	}
         
 	const isTaskToEdit = () =>{
@@ -34,8 +36,7 @@ function List(props)
                         {editTask ? 
                         <React.Fragment>
                                 <textarea className="editTask" 
-                                onChange={editTaskInList}>
-                                {updatedtask}
+                                onChange={editTaskInList} value={update}>
                                 </textarea>
                                 <button className="saveTask" 
                                 onClick={updateTask} 

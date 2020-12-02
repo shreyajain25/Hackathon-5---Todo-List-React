@@ -25,6 +25,7 @@ function App()
 	const deleteHandler = (taskId) =>{
 		tasks.splice(taskId, 1);
 		setTask([...tasks]);
+		console.log("Item with ", taskId, " is deleted");
 	}
 
 	return (
