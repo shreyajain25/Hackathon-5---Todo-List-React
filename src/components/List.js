@@ -3,27 +3,43 @@ import "./../styles/App.css";
 
 function List(props)
 {
-        console.log("====")
         const [editTask, setEditTask] = useState(false);
         let [updatedtask, setUpdatedTask] = useState(props.task);
+        let [update, setUpdate] = useState("");
+
+        // const deleteTask = () =>{
+        //         props.onDelete(props.key)
+        // }
 
 	const editTaskInList = (e) => {
-		setUpdatedTask(e.target.value);
+		setUpdate(e.target.value);
         }
+
+        const updateTask = () => {
+                setUpdatedTask(update);
+                setEditTask(false);
+                setUpdate("");
+                props.onEdit(updatedtask, props.idx);
+	}
         
 	const isTaskToEdit = () =>{
                 setEditTask(true);
 	}
 	return (
                 <div className= "list">
-                        {props.task}
+                        {updatedtask}
                         <button className="edit" onClick={isTaskToEdit}>Edit</button>
-                        <button className="delete">Delete</button>
+                        <button className="delete" onClick={() => {props.onDelete(props.idx)}}>Delete</button>
                         
                         {editTask ? 
                         <React.Fragment>
-                                <textarea  className="editTask" onChange={editTaskInList}></textarea>
-                                <button className="saveTask" onClick={()=>{setEditTask(false)}}>Save</button>
+                                <textarea className="editTask" 
+                                onChange={editTaskInList}>
+                                {updatedtask}
+                                </textarea>
+                                <button className="saveTask" 
+                                onClick={updateTask} 
+                                disabled={update.trim().length === 0}>Save</button>
                         </React.Fragment>
                         : null}
                 </div>

@@ -11,21 +11,30 @@ function App()
 		tasks.push(newTask);
 		setTask([...tasks]);
 		setNewTask("");
-		// setTask(task => [...task, newTask]);
 	}
 	
 	const addTaskToList = (e) => {
 		setNewTask(e.target.value);
 	}
+
+	const editHandler = (editedValue, taskId) =>{
+		tasks[taskId] = editedValue;
+		setTask([...tasks]);
+	}
+
+	const deleteHandler = (taskId) =>{
+		tasks.splice(taskId, 1);
+		setTask([...tasks]);
+	}
+
 	return (
 	<div id="main">
 		<textarea  id="task" onChange={addTaskToList} value={newTask}></textarea>
 		<button  id="btn" onClick={addTask} disabled={newTask.trim().length === 0}>Add Task to the List</button>
 		{tasks.map((task, idx) => {
-			{console.log(task)}
-			<List task={task} key={idx} id={idx} />
+			return <List task={task} key={idx} idx={idx} onDelete={deleteHandler} onEdit={editHandler} />
 		})}
-	</div>
+	</div> 
 	);
 }
 
