@@ -25,7 +25,7 @@ function App()
 	const deleteHandler = (taskId) =>{
 		tasks.splice(taskId, 1);
 		setTask([...tasks]);
-		console.log("Item with ", taskId, " is deleted");
+		// console.log("Item with ", taskId, " is deleted");
 	}
 
 	return (
@@ -33,7 +33,7 @@ function App()
 		<textarea  id="task" onChange={addTaskToList} value={newTask}></textarea>
 		<button  id="btn" onClick={addTask} disabled={newTask.trim().length === 0}>Add Task to the List</button>
 		{tasks.map((task, idx) => {
-			return <List task={task} key={idx} idx={idx} onDelete={deleteHandler} onEdit={editHandler} />
+			return <List task={task} key={`{$idx}_{$idx}`} idx={idx} onDelete={deleteHandler} onEdit={editHandler} />
 		})}
 	</div> 
 	);
